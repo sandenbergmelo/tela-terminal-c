@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "*.env.development": "env",
+    "*.env.production": "env",
+    "*.env": "env",
+    "*.env.example": "env",
+    "crud.h": "c",
+    "stdlib.h": "c",
+    "string": "c"
+  },
+  "cSpell.words": [
+    "IFCE",
+    "posicao"
+  ]
+}
