@@ -37,7 +37,7 @@ int main() {
   char salarioString[16];
   sprintf(salarioString, "%.2f", salario); // Converte o float para string
   label(14, 3, "Salário:");
-  label(14, 11, salarioString);
+  label(14, 12, salarioString);
 
   label(16, 3, "Pressione qualquer tecla para sair...\n");
   scanf("%*c");

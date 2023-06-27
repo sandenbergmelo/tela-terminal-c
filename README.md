@@ -8,4 +8,4 @@
 
 ### Para compilar use o comando `make` na raiz do projeto.
 ### Para executar use o comando `make run` na raiz do projeto.
-### No arquivo main.c tem um exemplo de uso (muito simples) da biblioteca.
+### No arquivo main.c tem um exemplo de uso (muito simples) de uso da biblioteca.
