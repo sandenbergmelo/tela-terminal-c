@@ -29,7 +29,6 @@ void janela(int linhaInicial, int colunaInicial, int linhaFinal,
             int colunaFinal, char *titulo, int tipoMoldura) {
 
   int largura = colunaFinal - colunaInicial + 1;
-  int altura = linhaFinal - linhaInicial + 1;
 
   moverCursor(linhaInicial, colunaInicial); // Define a posição do cursor no
                                             // canto superior esquerdo da janela
