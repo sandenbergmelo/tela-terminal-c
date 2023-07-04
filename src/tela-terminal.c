@@ -14,20 +14,25 @@ void limparTela() {
 #endif
 }
 
+void moverCursor(int linha, int coluna) {
+  // Define a posição do cursor no terminal
+  printf("\033[%d;%dH", linha, coluna);
+}
+
 // Função para definir a tela do terminal
 void inicializarTela() {
-  limparTela();        // Limpa a tela do terminal
-  printf("\033[1;1H"); // Define a posição do cursor como (1, 1)
+  limparTela();      // Limpa a tela do terminal
+  moverCursor(1, 1); // Move o cursor para a posição (1, 1)
 }
 
 void janela(int linhaInicial, int colunaInicial, int linhaFinal,
             int colunaFinal, char *titulo, int tipoMoldura) {
+
   int largura = colunaFinal - colunaInicial + 1;
   int altura = linhaFinal - linhaInicial + 1;
 
-  printf("\033[%d;%dH", linhaInicial,
-         colunaInicial); // Define a posição do cursor no canto superior
-                         // esquerdo da janela
+  moverCursor(linhaInicial, colunaInicial); // Define a posição do cursor no
+                                            // canto superior esquerdo da janela
 
   // Imprime a moldura superior
   if (tipoMoldura == 1) {
@@ -41,12 +46,12 @@ void janela(int linhaInicial, int colunaInicial, int linhaFinal,
   }
 
   // Imprime o título centralizado
-  printf("\033[%d;%dH", linhaInicial,
-         colunaInicial + (largura - strlen(titulo)) / 2);
+  int posicaoTitulo = (largura - strlen(titulo)) / 2;
+  moverCursor(linhaInicial, colunaInicial + posicaoTitulo);
   printf("%s", titulo);
 
   // Imprime a moldura inferior
-  printf("\033[%d;%dH", linhaFinal, colunaInicial);
+  moverCursor(linhaFinal, colunaInicial);
   if (tipoMoldura == 1) {
     printf("╚");
     for (int i = 1; i < largura - 1; i++) {
@@ -59,27 +64,27 @@ void janela(int linhaInicial, int colunaInicial, int linhaFinal,
 
   // Imprime as laterais da moldura
   for (int i = linhaInicial + 1; i < linhaFinal; i++) {
-    printf("\033[%d;%dH", i, colunaInicial);
+    moverCursor(i, colunaInicial);
     printf("║");
-    printf("\033[%d;%dH", i, colunaFinal);
+    moverCursor(i, colunaFinal);
     printf("║");
   }
 
   // Preenche o interior da janela com espaços em branco
   for (int i = linhaInicial + 1; i < linhaFinal; i++) {
     for (int j = colunaInicial + 1; j < colunaFinal; j++) {
-      printf("\033[%d;%dH", i, j);
+      moverCursor(i, j);
       printf(" ");
     }
   }
 }
 
-void label(int lin, int col, char *texto) {
-  printf("\033[%d;%dH", lin, col); // Define a posição do cursor no terminal
+void label(int linha, int coluna, char *texto) {
+  moverCursor(linha, coluna);
   printf("%s", texto);
 }
 
-char *lerString(int lin, int col, int tamanho) {
+char *lerString(int linha, int coluna, int tamanho) {
   char *string =
       malloc((tamanho + 1) * sizeof(char)); // Aloca memória para a string
   if (string == NULL) {
@@ -87,7 +92,7 @@ char *lerString(int lin, int col, int tamanho) {
     exit(1);
   }
 
-  printf("\033[%d;%dH", lin, col); // Define a posição do cursor no terminal
+  moverCursor(linha, coluna); // Define a posição do cursor no terminal
   fgets(string, tamanho + 1,
         stdin); // Lê a string do usuário, considerando o tamanho especificado
   string[strcspn(string, "\n")] = '\0'; // Remove o caractere de nova linha
@@ -95,22 +100,22 @@ char *lerString(int lin, int col, int tamanho) {
   return string;
 }
 
-int lerInteiro(int lin, int col, int tamanho) {
+int lerInteiro(int linha, int coluna, int tamanho) {
   char
       buffer[tamanho + 1]; // Cria um buffer para armazenar a entrada do usuário
 
-  printf("\033[%d;%dH", lin, col); // Define a posição do cursor no terminal
+  moverCursor(linha, coluna); // Define a posição do cursor no terminal
   fgets(buffer, tamanho + 1,
         stdin); // Lê a entrada do usuário, considerando o tamanho especificado
 
   return atoi(buffer); // Converte a string para int usando a função atoi
 }
 
-float lerDecimal(int lin, int col, int tamanho) {
+float lerDecimal(int linha, int coluna, int tamanho) {
   char
       buffer[tamanho + 1]; // Cria um buffer para armazenar a entrada do usuário
 
-  printf("\033[%d;%dH", lin, col); // Define a posição do cursor no terminal
+  moverCursor(linha, coluna); // Define a posição do cursor no terminal
   fgets(buffer, tamanho + 1,
         stdin); // Lê a entrada do usuário, considerando o tamanho especificado
 
